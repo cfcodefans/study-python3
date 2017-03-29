@@ -4,7 +4,7 @@ from typing import List, Dict
 from itertools import groupby
 
 
-def main():
+def mean_median_mode():
     # n: int = int(input())
     # array: List[int] = [int(s) for s in input().split(" ")]
     array = [3, 1, 4, 1, 5]
@@ -30,6 +30,12 @@ def main():
     print(min(_d[max(_d.keys())]))
 
 
+def weighted_mean():
+    n = int(input())
+    X = [int(s) for s in input().split(" ")]
+    W = [int(s) for s in input().split(" ")]
+    print("{0:.1f}".format(sum([x * w for x, w in zip(X, W)]) / sum(W)))
+
 
 if __name__ == '__main__':
-    main()
+    weighted_mean()
