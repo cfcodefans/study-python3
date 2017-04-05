@@ -1,7 +1,8 @@
 from functools import reduce
+from math import *
 
 from typing import List, Dict
-from itertools import groupby
+from itertools import groupby, chain
 
 
 def mean_median_mode():
@@ -37,5 +38,44 @@ def weighted_mean():
     print("{0:.1f}".format(sum([x * w for x, w in zip(X, W)]) / sum(W)))
 
 
+def quartiles():
+    def median_sorted(_sorted):
+        _len = len(_sorted)
+        if _len == 0:
+            return None
+        mid = int(_len / 2)
+        return (_sorted[mid] + _sorted[mid - 1 + _len % 2]) / 2
+
+    n = 9  # int(input())
+    array = [int(s) for s in "3 7 8 5 12 14 21 13 18".split(" ")]
+    _sorted = sorted(array)
+    print("{0:.0f}".format(median_sorted(_sorted[0: int(n / 2)])))
+    print("{0:.0f}".format(median_sorted(_sorted)))
+    print("{0:.0f}".format(median_sorted(_sorted[int(n / 2) + n % 2: n])))
+
+
+def interquartile_range():
+    def median_sorted(_sorted):
+        _len = len(_sorted)
+        if _len == 0:
+            return None
+        mid = int(_len / 2)
+        return (_sorted[mid] + _sorted[mid - 1 + _len % 2]) / 2
+
+    n = int(input())
+    X = [int(x) for x in input().split(" ")]
+    F = [int(f) for f in input().split(" ")]
+    S = sorted(reduce(lambda a, b: a + b, [[x] * f for x, f in zip(X, F)]))
+    _len = len(S)
+    print("{0:.0f}".format(median_sorted(S[int(_len / 2) + _len % 2: _len]) - median_sorted(S[0: int(_len / 2)])))
+
+
+def standard_deviation():
+    n = int(input())
+    X = [int(x) for x in input().split(" ")]
+    mean = sum(X) / n
+    print("{0:.1f}".format(sqrt(sum([(x - mean) ** 2 for x in X]) / n)))
+
+
 if __name__ == '__main__':
-    weighted_mean()
+    standard_deviation()
