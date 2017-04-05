@@ -30,6 +30,5 @@ def main():
     print(min(_d[max(_d.keys())]))
 
 
-
 if __name__ == '__main__':
     main()
