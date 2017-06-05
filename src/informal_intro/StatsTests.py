@@ -77,5 +77,30 @@ def standard_deviation():
     print("{0:.1f}".format(sqrt(sum([(x - mean) ** 2 for x in X]) / n)))
 
 
+def combinations():
+    _list = list(range(1, 6))
+    print(_list)
+
+    r = 3
+    buf = []
+
+    def iterate_for_combinations(src, combination=[], c=r):
+        if c == 1:
+            for e in src:
+                buf.append(combination + [e])
+            return
+
+        j = len(src)
+        for i in range(0, j):
+            if j - i <= c:
+                buf.append(combination + src[i:j])
+                return
+            iterate_for_combinations(src[i + 1:j], combination + [src[i]], c - 1)
+
+    iterate_for_combinations(_list)
+    for c in buf:
+        print(c)
+
+
 if __name__ == '__main__':
-    standard_deviation()
+    combinations()
