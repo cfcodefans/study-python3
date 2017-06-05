@@ -76,6 +76,9 @@ def standard_deviation():
     mean = sum(X) / n
     print("{0:.1f}".format(sqrt(sum([(x - mean) ** 2 for x in X]) / n)))
 
+from math import factorial
+def binomial(n, x, p, q):
+    return factorial(n) / (factorial(x) * factorial(n - x)) * pow(p, x) * pow(q, n - x)
 
 def combinations():
     _list = list(range(1, 6))
