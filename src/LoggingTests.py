@@ -8,7 +8,8 @@ logging.basicConfig(format="%(asctime)s\t%(levelname)s\t%(message)s", level=logg
 class LoggingTests(unittest.TestCase):
     logging.info("LoggingTests:init")
 
-    def test_info(self):
+    def test_log_info(self):
+        print(self)
         logging.info("LoggingTests:test_info")
         logging.info(tb.format_stack()[-1])
 

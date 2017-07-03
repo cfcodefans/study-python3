@@ -158,7 +158,7 @@ class PythonPlayground(unittest.TestCase):
         # print(LA.norm(a))
         print(LA.norm([2, 2]))
         print(LA.norm([2, 2, 2]))
-        print(LA.norm(np.array([1,2]) - np.array([2,1])))
+        print(LA.norm(np.array([1, 2]) - np.array([2, 1])))
 
 
 if __name__ == '__main__':
