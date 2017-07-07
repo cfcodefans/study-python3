@@ -5,7 +5,8 @@ class FileSystemTests(unittest.TestCase):
 
     def test_current_path(self):
         print(path.abspath(path.curdir))
-
+        import math
+        math.e
     pass
 
 
