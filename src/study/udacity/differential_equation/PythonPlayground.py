@@ -158,7 +158,49 @@ class PythonPlayground(unittest.TestCase):
         # print(LA.norm(a))
         print(LA.norm([2, 2]))
         print(LA.norm([2, 2, 2]))
-        print(LA.norm(np.array([1,2]) - np.array([2,1])))
+        print(LA.norm(np.array([1, 2]) - np.array([2, 1])))
+
+    def test_static_orbit(self):
+        import numpy
+        import math
+
+        earth_mass = 5.97e24  # kg
+        gravitational_constant = 6.67e-11  # N m2 / kg2
+
+        print()
+        re = gravitational_constant * earth_mass * (60 * 60 * 24) ** 2 / (4 * (math.pi ** 2))
+        print(math.pow(re, 1 / 3))
+
+
+import numpy
+import math
+
+earth_mass = 5.97e24  # kg
+moon_mass = 7.35e22  # kg
+gravitational_constant = 6.67e-11  # N m2 / kg2
+
+re = gravitational_constant * earth_mass * 86400 ** 2 / 4 * (math.pi ** 2)
+print(re ** -3)
+pass
+
+
+# The origin, or (0,0), is at the center of the earth
+# in this example, so it doesn't make any sense to
+# set either the moon_position or spaceship_position
+# equal to (0,0). Depending on your solution, doing this
+# may throw an error!  Please note that moon_position and
+# spaceship_position are both numpy arrays, and the
+# returned value should also be a numpy array.
+
+def acceleration(moon_position, spaceship_position):
+    # nonsense = numpy.linalg.norm(moon_position) * spaceship_position
+    v_moon_spaceship = moon_position - spaceship_position
+    v_earth_spaceship = - spaceship_position
+    G = gravitational_constant
+    nonsense = G * (
+        moon_mass / numpy.linalg.norm(v_moon_spaceship) ** 3 * v_moon_spaceship + earth_mass / numpy.linalg.norm(
+            v_earth_spaceship) ** 3 * v_earth_spaceship)
+    return nonsense
 
 
 if __name__ == '__main__':
