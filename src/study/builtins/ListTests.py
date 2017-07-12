@@ -35,5 +35,8 @@ class ListTests(unittest.TestCase):
         print([2] + [4])
         print([2].append(4))
 
+    def test_get_index(self):
+        print(list(range(10)).index(20))
+
 if __name__ == '__main__':
     unittest.main
