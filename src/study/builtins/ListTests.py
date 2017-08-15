@@ -8,7 +8,6 @@ class ListTests(unittest.TestCase):
     def test_repeat(self):
         print([1] * 5)
 
-
     def test_delete(self):
         _list: list = list(range(3, 9))
         print(_list)
@@ -30,13 +29,21 @@ class ListTests(unittest.TestCase):
         print(_list[-3])
         print(_list[-3:])
         print(_list[:-3])
+        # print(_list[...:5])
 
     def test_add(self):
         print([2] + [4])
         print([2].append(4))
 
     def test_get_index(self):
-        print(list(range(10)).index(20))
+        print(list(range(10)).index(5))
+
+    def test_unpack(self):
+        a, = [0]
+        print("a:\t", a)
+        a, b = [1, 0]
+        print("a:\t", a, "b:\t", b)
 
 if __name__ == '__main__':
-    unittest.main
+    # unittest.main
+    ListTests().test_unpack()
