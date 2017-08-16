@@ -150,6 +150,7 @@ class PythonPlayground(unittest.TestCase):
     def test_linalg_norm(self):
         import numpy as np
         from numpy import linalg as LA
+
         # a: np.ndarray = np.arange(9) - 4
         # print(a)
         # b = a.reshape((3, 3))
