@@ -1,4 +1,5 @@
 import unittest
+from typing import List
 
 
 class ListTests(unittest.TestCase):
@@ -44,6 +45,13 @@ class ListTests(unittest.TestCase):
         a, b = [1, 0]
         print("a:\t", a, "b:\t", b)
 
+    def test_zip(self):
+        _list: List[(float, float)] = [(1, 2), (2, 4), (3, 6)]
+        _zip = zip(*_list)
+        for x in _zip:
+            print(x)
+
+
 if __name__ == '__main__':
     # unittest.main
-    ListTests().test_unpack()
+    ListTests().test_zip()
