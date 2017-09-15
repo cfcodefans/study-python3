@@ -63,13 +63,13 @@ def mean_stdev(nums: List[float]) -> (float, float):
     return avg, stdev(nums, avg)
 
 
-def summarize(_data: Rows) -> (float, float):
-    summaries: List[(float, float)] = [mean_stdev(attribute) for attribute in zip(*_data)]
+MeanAndStdDev = Tuple[float, float]
+
+
+def summarize(_data: Rows) -> List[MeanAndStdDev]:
+    summaries: List[MeanAndStdDev] = [mean_stdev(attribute) for attribute in zip(*_data)]
     del summaries[-1]
     return summaries
-
-
-MeanAndStdDev = Tuple[float, float]
 
 
 def summarize_by_class(_data: Rows) -> {int: List[MeanAndStdDev]}:
