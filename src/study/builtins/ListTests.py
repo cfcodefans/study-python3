@@ -6,6 +6,9 @@ class ListTests(unittest.TestCase):
     def setUp(self):
         print()
 
+    def test_extend(self):
+        print(["a"] + [2, 3, 4])
+
     def test_repeat(self):
         print([1] * 5)
 
