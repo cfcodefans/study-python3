@@ -54,6 +54,9 @@ class ListTests(unittest.TestCase):
         for x in _zip:
             print(x)
 
+    def test_update(self):
+        _list: List = [1, 2, 3]
+
 
 if __name__ == '__main__':
     # unittest.main

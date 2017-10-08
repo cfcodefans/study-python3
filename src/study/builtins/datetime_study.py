@@ -18,5 +18,6 @@ class DateTimeTests(ut.TestCase):
         dp: date = date(2014, 1, 1)
         print(d < dp)
 
+
 if __name__ == '__main__':
     ut.main()

@@ -33,6 +33,12 @@ class NumpyTests(ut.TestCase):
         arr2: np.ndarray = np.array(range(5, 10))
         print(arr1, arr2, np.append(arr1, arr2))
 
+    def test_index(self):
+        arr: np.ndarray = np.random.randn(100) * 100
+        print(type(arr), arr[90:])
+        arr = np.array([list(range(x * 10, x * 10 + 10)) for x in range(0, 10)])
+        print(type(arr[0]), arr[0][5:])
+
 
 if __name__ == '__main__':
     ut.main()
