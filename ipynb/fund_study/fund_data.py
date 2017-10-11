@@ -4,6 +4,7 @@ import requests as Req
 from lxml import etree
 from typing import List
 from os import *
+from pandas import *
 
 
 # 根据基金代码到 天天基金网拉取数据
@@ -53,7 +54,7 @@ def try_float(s: str, _default: float = 0.0) -> float:
         return _default
 
 
-def parse_raw_data(data_str: str) -> np.ndarray:
+def parse_raw_data(data_str: str) -> DataFrame:
     el: etree._Element = etree.HTML(data_str)
     trList: List[etree._Element] = el.xpath("//tbody/tr")
     data: np.ndarray = np.array([[td for td in tr.xpath("./td/text()")[:4]] for tr in trList])
@@ -61,7 +62,8 @@ def parse_raw_data(data_str: str) -> np.ndarray:
         [[datetime.strptime(row[0], '%Y-%m-%d'), try_float(row[1]), try_float(row[2]), try_float(row[3][:-1])] for row
          in data])
     data = data[::-1]
-    return data
+    df: DataFrame = DataFrame(data, columns=["date", "price", "net_worth", "change"])
+    return df
 
 
 def get_fund_data(code: str, sdate: date = None, edate: date = None) -> np.ndarray:
@@ -74,12 +76,18 @@ def get_fund_data(code: str, sdate: date = None, edate: date = None) -> np.ndarr
         print(f"found no data file at:\n\t{file_path}")
         now: date = datetime.now()
         start: date = date(now.year - 5, now.month, now.day)
-        loaded: np.ndarray = parse_raw_data(load_raw_data(code, start))
+        # loaded: np.ndarray = parse_raw_data(load_raw_data(code, start))
+        loaded: DataFrame = parse_raw_data(load_raw_data(code, start))
         print(loaded[0:3])
-        loaded = np.array([np.append([row[0].strftime("%Y-%m-%d")], row[1:]) for row in loaded])
+        # loaded = np.array([np.append([row[0].strftime("%Y-%m-%d")], row[1:]) for row in loaded])
+        loaded = loaded.apply(lambda ds: ds.strftime("%Y-%m-%d"), axis=0)
         print(loaded[0:3])
-        np.savetxt(file_path, loaded, delimiter=",", fmt=["%s", "%.4f", "%.4f", "%.4f"])
+        loaded.to_csv(file_path)
+        # np.savetxt(file_path, loaded, delimiter=",", fmt=["%s", "%.4f", "%.4f", "%.4f"])
         print(f"load and save data to:\n\t{file_path}")
+
+    df: DataFrame = read_csv(file_path, delimiter=",")
+    latest: date = df.tail(1)[0]
 
     if edate is None:
         edate = datetime.now().date()
@@ -96,5 +104,6 @@ def get_fund_data(code: str, sdate: date = None, edate: date = None) -> np.ndarr
 
     data_in_span: List = np.array(
         [list(row) for row in data if start <= str(row[0].decode('utf-8')) <= end])
-    data = np.array([np.append(np.array(datetime.strptime(row[0].decode('utf-8'), "%Y-%m-%d")), row[1:]) for row in data_in_span])
+    data = np.array(
+        [np.append(np.array(datetime.strptime(row[0].decode('utf-8'), "%Y-%m-%d")), row[1:]) for row in data_in_span])
     return data
