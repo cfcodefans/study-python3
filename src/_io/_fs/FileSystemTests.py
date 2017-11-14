@@ -1,6 +1,7 @@
 from os import path
 import unittest
 
+
 class FileSystemTests(unittest.TestCase):
 
     def test_current_path(self):

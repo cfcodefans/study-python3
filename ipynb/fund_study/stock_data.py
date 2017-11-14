@@ -10,6 +10,12 @@ class TuShareTests(ut.TestCase):
         s_sh: pd.DataFrame = ts.get_k_data(code="sh", start="2017-01-01", ktype="D")
         print(s_sh)
 
+    def test_boxoffice_1(self):
+        bf: pd.DataFrame = ts.realtime_boxoffice()
+        print(bf)
+        bf: pd.DataFrame = ts.day_boxoffice()
+        print(bf)
+
     pass
 
 
