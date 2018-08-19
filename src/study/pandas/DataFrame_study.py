@@ -60,6 +60,10 @@ class DataFrameTests(ut.TestCase):
         h_ls['DIFF'] = _df['DIFF']
         print(h_ls)
 
+    def test_df_plot(self):
+        import matplotlib.pyplot as plt
+        plt.show()
+
     pass
 
 
